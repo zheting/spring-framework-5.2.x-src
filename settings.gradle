@@ -37,3 +37,9 @@ rootProject.name = "spring"
 rootProject.children.each {project ->
 	project.buildFileName = "${project.name}.gradle"
 }
+
+// 新增的子模块， 用于调试源码
+include 'srping-mytest'
+
+
+
