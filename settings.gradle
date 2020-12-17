@@ -1,7 +1,9 @@
 pluginManagement {
 	repositories {
 		//gradlePluginPortal() // 默认的插件库
-		maven { url 'https://maven.aliyun.com/repository/gradle-plugin' } // 阿里云gradle 插件库
+		// 阿里云gradle 插件库
+		maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+		// spring插件库 修改为阿里云镜像地址
 		maven { url 'https://maven.aliyun.com/repository/spring-plugin' }
 	}
 }

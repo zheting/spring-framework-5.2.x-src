@@ -284,8 +284,7 @@ configure(allprojects) { project ->
 			cacheChangingModulesFor 0, "seconds"
 		}
 		repositories {
-			//新增以下2个阿里云镜像  https://maven.aliyun.com/mvn/guide
-			maven { url 'https://maven.aliyun.com/repository/central' }
+			//central仓和jcenter仓的聚合仓
 			maven { url 'https://maven.aliyun.com/repository/public' }
 			mavenCentral()
 			maven { url "https://repo.spring.io/libs-spring-framework-build" }

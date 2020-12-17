@@ -3,11 +3,11 @@ plugins {
 }
 
 repositories {
-	//新增以下2个阿里云镜像
-	maven { url 'https://maven.aliyun.com/repository/central' }
+	//新增阿里云镜像
 	maven { url 'https://maven.aliyun.com/repository/public' }
 	mavenCentral()
-	gradlePluginPortal()
+	//gradlePluginPortal()
+	maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
 }
 
 dependencies {
