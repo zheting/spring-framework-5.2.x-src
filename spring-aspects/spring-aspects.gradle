@@ -10,8 +10,11 @@ sourceSets.test.java.srcDirs = files()
 
 aspectj.version = dependencyManagement.managedVersions['org.aspectj:aspectjweaver']
 
+/**
+ * compile 'org.springframework:spring-aspects:5.2.12.RELEASE'
+ */
 dependencies {
-	compile("org.aspectj:aspectjweaver")
+	compile("org.aspectj:aspectjweaver")  // spring aspects 依赖了aspectj, 因此引入Aop 应该是spring-aspects
 	compileOnly("org.aspectj:aspectjrt")
 	optional(project(":spring-aop"))  // for @Async support
 	optional(project(":spring-beans"))  // for @Configurable support
