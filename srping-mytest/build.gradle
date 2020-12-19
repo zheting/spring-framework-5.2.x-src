@@ -13,5 +13,6 @@ dependencies {
     compile(project(":spring-core"))
     compile(project(":spring-aop"))
     compile(project(":spring-aspects"))  //引入AspectJ
-    compile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'junit:junit:4.13'
+    implementation 'org.hamcrest:hamcrest-core:2.2'  //java.lang.NoClassDefFoundError: org/hamcrest/SelfDescribing
 }
