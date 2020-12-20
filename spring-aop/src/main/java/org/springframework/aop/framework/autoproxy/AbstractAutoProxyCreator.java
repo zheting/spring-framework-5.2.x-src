@@ -202,6 +202,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 		this.applyCommonInterceptorsFirst = applyCommonInterceptorsFirst;
 	}
 
+	//BeanFactoryAware接口中方法的实现, 看IDEA 左边的提示 ↓，还有子类重写该方法
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) {
 		this.beanFactory = beanFactory;
@@ -291,6 +292,7 @@ public abstract class AbstractAutoProxyCreator extends ProxyProcessorSupport
 	 * identified as one to proxy by the subclass.
 	 * @see #getAdvicesAndAdvisorsForBean
 	 */
+	//BeanPostProcessor接口方法的实现
 	@Override
 	public Object postProcessAfterInitialization(@Nullable Object bean, String beanName) {
 		if (bean != null) {

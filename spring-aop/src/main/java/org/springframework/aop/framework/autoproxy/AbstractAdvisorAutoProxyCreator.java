@@ -54,7 +54,7 @@ public abstract class AbstractAdvisorAutoProxyCreator extends AbstractAutoProxyC
 	@Nullable
 	private BeanFactoryAdvisorRetrievalHelper advisorRetrievalHelper;
 
-
+	// 子类重写了父类的setBeanFactory，那么调用的是子类重写方法
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) {
 		super.setBeanFactory(beanFactory);
@@ -62,6 +62,7 @@ public abstract class AbstractAdvisorAutoProxyCreator extends AbstractAutoProxyC
 			throw new IllegalArgumentException(
 					"AdvisorAutoProxyCreator requires a ConfigurableListableBeanFactory: " + beanFactory);
 		}
+
 		initBeanFactory((ConfigurableListableBeanFactory) beanFactory);
 	}
 

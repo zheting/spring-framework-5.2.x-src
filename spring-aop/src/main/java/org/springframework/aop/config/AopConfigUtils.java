@@ -96,7 +96,7 @@ public abstract class AopConfigUtils {
 	@Nullable
 	public static BeanDefinition registerAspectJAnnotationAutoProxyCreatorIfNecessary(
 			BeanDefinitionRegistry registry, @Nullable Object source) {
-
+		// 注册 AnnotationAwareAspectJAutoProxyCreator 到容器
 		return registerOrEscalateApcAsRequired(AnnotationAwareAspectJAutoProxyCreator.class, registry, source);
 	}
 
@@ -119,7 +119,7 @@ public abstract class AopConfigUtils {
 			Class<?> cls, BeanDefinitionRegistry registry, @Nullable Object source) {
 
 		Assert.notNull(registry, "BeanDefinitionRegistry must not be null");
-
+		//如果容器中已经包含 org.springframework.aop.config.internalAutoProxyCreator 这个bean
 		if (registry.containsBeanDefinition(AUTO_PROXY_CREATOR_BEAN_NAME)) {
 			BeanDefinition apcDefinition = registry.getBeanDefinition(AUTO_PROXY_CREATOR_BEAN_NAME);
 			if (!cls.getName().equals(apcDefinition.getBeanClassName())) {
@@ -136,6 +136,7 @@ public abstract class AopConfigUtils {
 		beanDefinition.setSource(source);
 		beanDefinition.getPropertyValues().add("order", Ordered.HIGHEST_PRECEDENCE);
 		beanDefinition.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);
+		//注册
 		registry.registerBeanDefinition(AUTO_PROXY_CREATOR_BEAN_NAME, beanDefinition);
 		return beanDefinition;
 	}

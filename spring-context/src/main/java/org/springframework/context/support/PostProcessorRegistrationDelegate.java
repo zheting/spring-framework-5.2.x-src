@@ -188,7 +188,8 @@ final class PostProcessorRegistrationDelegate {
 
 	public static void registerBeanPostProcessors(
 			ConfigurableListableBeanFactory beanFactory, AbstractApplicationContext applicationContext) {
-
+		// 获取IOC容器已经定义了的需要创建对象的所有BeanPostProcessor
+		// 其中 org.springframework.aop.config.internalAutoProxyCreator 就是 @EnableAspectJAutoProxy注解加入的 BeanDefinition
 		String[] postProcessorNames = beanFactory.getBeanNamesForType(BeanPostProcessor.class, true, false);
 
 		// Register BeanPostProcessorChecker that logs an info message when
@@ -197,6 +198,8 @@ final class PostProcessorRegistrationDelegate {
 		int beanProcessorTargetCount = beanFactory.getBeanPostProcessorCount() + 1 + postProcessorNames.length;
 		beanFactory.addBeanPostProcessor(new BeanPostProcessorChecker(beanFactory, beanProcessorTargetCount));
 
+		// BeanPostProcessor 优先级处理：  PriorityOrdered>Ordered>普通
+		// @EnableAspectJAutoProxy 注册的组件 实现了接口Ordered
 		// Separate between BeanPostProcessors that implement PriorityOrdered,
 		// Ordered, and the rest.
 		List<BeanPostProcessor> priorityOrderedPostProcessors = new ArrayList<>();
