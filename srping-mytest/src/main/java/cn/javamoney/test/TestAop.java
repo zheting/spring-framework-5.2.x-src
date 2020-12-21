@@ -14,6 +14,7 @@ public class TestAop {
 	 * 3.0 切面类中配置切入点表达式 @Pointcut， 表达式是连接点的集合
 	 * 4.0 切面类中配置通知：前置通知，后置通知，环绕通知等
 	 * 5.0 把切面类LogAspects和业务类MathCaculator 都加入spring ioc容器
+	 * 6.0 调用目标类的目标方法，实际是代理对象调用目标方法
 	 *
 	 */
 	@Test

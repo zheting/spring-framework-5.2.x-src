@@ -62,6 +62,12 @@ import org.springframework.lang.Nullable;
  * @see org.springframework.aop.framework.ProxyFactoryBean
  * @see org.springframework.jndi.JndiObjectFactoryBean
  */
+/*
+ * BeanFactory 和 FactoryBean 区别
+ * 	  都是用来创建对象的
+ * 	  当使用BeanFactory的时候必须遵循完整的创建过程，这个过程是由spring来管理的
+ * 	  而使用FactoyBean只需要调用getObject就可以返回具体的对象，整个对象的创建过程是由用户自己来控制的
+ */
 public interface FactoryBean<T> {
 
 	/**

@@ -59,6 +59,9 @@ import org.springframework.beans.BeansException;
  * @see BeanPostProcessor
  * @see PropertyResourceConfigurer
  */
+/*
+	BeanFactoryPostProcessor 用于增强 BeanDefinition
+ */
 @FunctionalInterface
 public interface BeanFactoryPostProcessor {
 
