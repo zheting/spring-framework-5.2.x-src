@@ -140,7 +140,7 @@ public class ClassPathXmlApplicationContext extends AbstractXmlApplicationContex
 		// new PathMatchingResourcePatternResolver
 		// new StandardEnvironment
 		super(parent);
-
+		// 启动容器时传入的 配置bean的xml文件路劲
 		setConfigLocations(configLocations);
 		if (refresh) {
 			refresh();
