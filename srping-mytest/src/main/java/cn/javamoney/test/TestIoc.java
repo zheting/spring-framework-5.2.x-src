@@ -12,7 +12,15 @@ public class TestIoc {
 	 */
 	@Test
 	public void test() {
-		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		//ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("spring-${env}-beans.xml");
+		User user = ac.getBean("user", User.class);
+		System.out.println(user);
+	}
+
+	public static void main(String[] args) {
+		//ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("beans.xml");
+		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("spring-${env}-beans.xml");
 		User user = ac.getBean("user", User.class);
 		System.out.println(user);
 	}

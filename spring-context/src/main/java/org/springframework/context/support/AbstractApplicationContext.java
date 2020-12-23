@@ -135,6 +135,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	protected final Log logger = LogFactory.getLog(getClass());
 
 	/** Unique id for this context, if any. */
+	//创建上下文的唯一标识
 	private String id = ObjectUtils.identityToString(this);
 
 	/** Display name. */
@@ -198,6 +199,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * Create a new AbstractApplicationContext with no parent.
 	 */
 	public AbstractApplicationContext() {
+		// 创建资源模式处理器
 		this.resourcePatternResolver = getResourcePatternResolver();
 	}
 
@@ -428,6 +430,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * @see org.springframework.core.io.support.PathMatchingResourcePatternResolver
 	 */
 	protected ResourcePatternResolver getResourcePatternResolver() {
+		// 创建一个资源模式解析器（其实就是用来解析xml配置文件）
 		return new PathMatchingResourcePatternResolver(this);
 	}
 
@@ -444,6 +447,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 * its environment is an instance of {@link ConfigurableEnvironment}.
 	 * @see ConfigurableEnvironment#merge(ConfigurableEnvironment)
 	 */
+	// 设置父容器
 	@Override
 	public void setParent(@Nullable ApplicationContext parent) {
 		this.parent = parent;
@@ -514,6 +518,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				registerBeanPostProcessors(beanFactory);
 
 				// Initialize message source for this context.
+				// 国际化 i18n
 				initMessageSource();
 
 				// Initialize event multicaster for this context.
@@ -521,6 +526,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 				initApplicationEventMulticaster();
 
 				// Initialize other special beans in specific context subclasses.
+				//用于扩展， springboot中启动tomcat
 				onRefresh();
 
 				// Check for listener beans and register them.
@@ -565,10 +571,13 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 */
 	protected void prepareRefresh() {
 		// Switch to active.
+		// 设置容器启动的时间
 		this.startupDate = System.currentTimeMillis();
+		// 容器关闭标志位
 		this.closed.set(false);
+		// 容器激活标志位
 		this.active.set(true);
-
+		// 记录日志
 		if (logger.isDebugEnabled()) {
 			if (logger.isTraceEnabled()) {
 				logger.trace("Refreshing " + this);
@@ -579,6 +588,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		}
 
 		// Initialize any placeholder property sources in the context environment.
+		// 留给子类覆盖，初始化属性资源
 		initPropertySources();
 
 		// Validate that all properties marked as required are resolvable:
@@ -589,12 +599,14 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		 * -> StandardEnvironment 重写了方法 customizePropertySources 加载了系统属性和系统环境变量
 		 * -> 放入 MutablePropertySources propertySources
 		 *
+		 * validateRequiredProperties 校验必须的属性，就是setRequiredProperties设置的属性
 		 */
 		getEnvironment().validateRequiredProperties();
 
 		// Store pre-refresh ApplicationListeners...
 		// 初始化监听器集合
 		if (this.earlyApplicationListeners == null) {
+			// applicationListeners 在springboot中spring.factroies文件中定义
 			this.earlyApplicationListeners = new LinkedHashSet<>(this.applicationListeners);
 		}
 		else {
@@ -842,6 +854,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	 */
 	protected void finishBeanFactoryInitialization(ConfigurableListableBeanFactory beanFactory) {
 		// Initialize conversion service for this context.
+		//类型转换
 		if (beanFactory.containsBean(CONVERSION_SERVICE_BEAN_NAME) &&
 				beanFactory.isTypeMatch(CONVERSION_SERVICE_BEAN_NAME, ConversionService.class)) {
 			beanFactory.setConversionService(
@@ -851,6 +864,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		// Register a default embedded value resolver if no bean post-processor
 		// (such as a PropertyPlaceholderConfigurer bean) registered any before:
 		// at this point, primarily for resolution in annotation attribute values.
+		//
 		if (!beanFactory.hasEmbeddedValueResolver()) {
 			beanFactory.addEmbeddedValueResolver(strVal -> getEnvironment().resolvePlaceholders(strVal));
 		}
